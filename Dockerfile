@@ -2,10 +2,10 @@
 # Using dependency references from https://pages.github.com/versions/
 
 # 2.7.3 is GitHub Pages 226 compatible
-ARG RUBY_VERSION=2.7.3
-ARG BUILD_DATE=""
-ARG VCS_REF=""
-ARG VERSION_NUMBER=""
+ARG RUBY_VERSION
+ARG BUILD_DATE
+ARG VCS_REF
+ARG VERSION_NUMBER
 
 FROM ruby:${RUBY_VERSION}
 
