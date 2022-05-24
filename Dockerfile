@@ -9,14 +9,12 @@ FROM ruby:${RUBY_VERSION}
 # NOTE: These args need to stay below the FROM line in order for Docker to recognize them.
 ARG BUILD_DATE
 ARG VCS_REF
-ARG VERSION_NUMBER
 ARG GH_PAGES_VERSION=226
 ARG NODE_MAJOR_VERSION=16
 
 RUN echo "RUBY_VERSION=${RUBY_VERSION}"
 RUN echo "BUILD_DATE=${BUILD_DATE}"
 RUN echo "VCS_REF=${VCS_REF}"
-RUN echo "VERSION_NUMBER=${VERSION_NUMBER}"
 RUN echo "GH_PAGES_VERSION=${GH_PAGES_VERSION}"
 RUN echo "NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION}"
 
@@ -29,7 +27,6 @@ LABEL org.opencontainers.image.documentation="https://github.com/excellalabs/blo
 LABEL org.opencontainers.image.source="https://github.com/excellalabs/blog-in-a-box"
 LABEL org.opencontainers.image.revision="${VCS_REF}"
 LABEL org.opencontainers.image.vendor="Excella"
-LABEL org.opencontainers.image.version="${VERSION_NUMBER}"
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.authors="Sean Killeen <sean.killeen@excella.com>"
 

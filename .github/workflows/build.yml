@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION} --build-arg RUBY_VERSION=${RUBY_VERSION} --build-arg NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION} --build-arg BUILD_DATE=$(date -u +%Y-%m-%d_%H-%M-%S) --build-arg VCS_REF=${GITHUB_SHA} --build-arg VERSION_NUMBER=test --build-arg GH_PAGES_VERSION=${GITHUB_PAGES_VERSION} --progress=plain
+        run: docker build . --file Dockerfile --tag ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION} --build-arg RUBY_VERSION=${RUBY_VERSION} --build-arg NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION} --build-arg BUILD_DATE=$(date -u +%Y-%m-%d_%H-%M-%S) --build-arg VCS_REF=${GITHUB_SHA} --build-arg GH_PAGES_VERSION=${GITHUB_PAGES_VERSION} --progress=plain
       - name: Inspect the built image
         run: docker inspect ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION}
       - name: Login to registry (non-PR only)
