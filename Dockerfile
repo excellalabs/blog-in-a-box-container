@@ -31,7 +31,6 @@ LABEL gh_pages_version="${GH_PAGES_VERSION}"
 LABEL node_major_version="${NODE_MAJOR_VERSION}"
 
 VOLUME /docs
-
 WORKDIR /docs
 
 ######################################################
