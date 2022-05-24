@@ -2,15 +2,16 @@
 # Using dependency references from https://pages.github.com/versions/
 
 # 2.7.3 is GitHub Pages 226 compatible
-ARG RUBY_VERSION
+ARG RUBY_VERSION=2.7.3
 
 FROM ruby:${RUBY_VERSION}
 
+# NOTE: These args need to stay below the FROM line in order for Docker to recognize them.
 ARG BUILD_DATE
 ARG VCS_REF
 ARG VERSION_NUMBER
-ARG GH_PAGES_VERSION
-ARG NODE_MAJOR_VERSION
+ARG GH_PAGES_VERSION=226
+ARG NODE_MAJOR_VERSION=16
 
 # Label Reference: https://github.com/opencontainers/image-spec/blob/main/annotations.md
 LABEL org.opencontainers.image.created="${BUILD_DATE}"
