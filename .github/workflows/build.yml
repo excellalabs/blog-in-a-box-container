@@ -8,14 +8,20 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        RUBY_VERSION: [2.7.3]
+        NODE_MAJOR_VERSION: [16, 18]
+        GITHUB_PAGES_VERSION: [226]
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag blog-in-a-box-container:$(date +%s) --tag blog-in-a-box-container:build --build-arg RUBY_VERSION=${RUBY_VERSION} --build-arg NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION} --build-arg BUILD_DATE=$(date -u +%Y-%m-%d_%H-%M-%S) --build-arg VCS_REF=${GITHUB_SHA} --build-arg VERSION_NUMBER=test --build-arg GH_PAGES_VERSION=226 --progress=plain
+        run: docker build . --file Dockerfile --tag blog-in-a-box-container:$(date +%s) --tag blog-in-a-box-container:build --build-arg RUBY_VERSION=${RUBY_VERSION} --build-arg NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION} --build-arg BUILD_DATE=$(date -u +%Y-%m-%d_%H-%M-%S) --build-arg VCS_REF=${GITHUB_SHA} --build-arg VERSION_NUMBER=test --build-arg GH_PAGES_VERSION=${GITHUB_PAGES_VERSION} --progress=plain
         env:
-          RUBY_VERSION: 2.7.3
-          NODE_MAJOR_VERSION: 16
+          RUBY_VERSION: ${{ matrix.RUBY_VERSION }}
+          NODE_MAJOR_VERSION: ${{ matrix.NODE_MAJOR_VERSION }}
+          GITHUB_PAGES_VERSION: ${{ matrix.GITHUB_PAGES_VERSION }}
       - name: Inspect the built image
         run: docker inspect blog-in-a-box-container:build
