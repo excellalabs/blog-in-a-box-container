@@ -31,7 +31,7 @@ jobs:
       - name: Inspect the built image
         run: docker inspect ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION}
       - name: Login to registry (main branch only)
-        uses: docker/login-action
+        uses: docker/login-action@v2.0.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
