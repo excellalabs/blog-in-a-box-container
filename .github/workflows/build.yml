@@ -30,9 +30,13 @@ jobs:
         run: docker build . --file Dockerfile --tag ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION} --build-arg RUBY_VERSION=${RUBY_VERSION} --build-arg NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION} --build-arg BUILD_DATE=$(date -u +%Y-%m-%d_%H-%M-%S) --build-arg VCS_REF=${GITHUB_SHA} --build-arg VERSION_NUMBER=test --build-arg GH_PAGES_VERSION=${GITHUB_PAGES_VERSION} --progress=plain
       - name: Inspect the built image
         run: docker inspect ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION}
-      - name: Login to registry (main branch only)
+      - name: Login to registry (non-PR only)
+        if: github.event_name != 'pull_request'
         uses: docker/login-action@v2.0.0
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push Container to registry (non-PR only)
+        if: github.event_name != 'pull_request'
+        run: docker push --all-tags ${REGISTRY}/${IMAGE_NAME}
