@@ -1,11 +1,18 @@
-name: PR Build
+name: Build & Release
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ gitub.repository }}
+
 jobs:
-  build:
+  build_release:
+    name: "Build and Release"
     strategy:
       matrix:
         RUBY_VERSION: [2.7.3]
@@ -20,6 +27,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag excellalabs/blog-in-a-box-container:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION} --build-arg RUBY_VERSION=${RUBY_VERSION} --build-arg NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION} --build-arg BUILD_DATE=$(date -u +%Y-%m-%d_%H-%M-%S) --build-arg VCS_REF=${GITHUB_SHA} --build-arg VERSION_NUMBER=test --build-arg GH_PAGES_VERSION=${GITHUB_PAGES_VERSION} --progress=plain
+        run: docker build . --file Dockerfile --tag ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION} --build-arg RUBY_VERSION=${RUBY_VERSION} --build-arg NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION} --build-arg BUILD_DATE=$(date -u +%Y-%m-%d_%H-%M-%S) --build-arg VCS_REF=${GITHUB_SHA} --build-arg VERSION_NUMBER=test --build-arg GH_PAGES_VERSION=${GITHUB_PAGES_VERSION} --progress=plain
       - name: Inspect the built image
-        run: docker inspect excellalabs/blog-in-a-box-container:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION}
+        run: docker inspect ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION}
+      - name: Login to registry (main branch only)
+        uses: docker/login-action
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
