@@ -9,8 +9,8 @@ ARG VERSION_NUMBER
 
 FROM ruby:${RUBY_VERSION}
 
-ARG GH_PAGES_VERSION=226
-ARG NODE_MAJOR_VERSION=16
+ARG GH_PAGES_VERSION
+ARG NODE_MAJOR_VERSION
 
 # Label Reference: https://github.com/opencontainers/image-spec/blob/main/annotations.md
 LABEL org.opencontainers.image.created="${BUILD_DATE}"
