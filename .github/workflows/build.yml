@@ -17,3 +17,5 @@ jobs:
         env:
           RUBY_VERSION: 2.7.3
           NODE_MAJOR_VERSION: 16
+      - name: Inspect the built image
+        run: docker inspect
