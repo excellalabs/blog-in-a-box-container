@@ -1,0 +1,19 @@
+name: Build
+
+env:
+  RUBY_VERSION: 2.7.3
+  NODE_MAJOR_VERSION: 16
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag blog-in-a-box-container:$(date +%s) --build-arg RUBY_VERSION=$RUBY_VERSION --build-arg NODE_MAJOR_VERSION=$NODE_MAJOR_VERSION --build-arg BUILD_DATE=$(date +%s) --build-arg VCS_REF=$GITHUB_SHA --build-arg VERSION_NUMBER=test
