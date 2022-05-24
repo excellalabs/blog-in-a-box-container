@@ -13,6 +13,13 @@ ARG VERSION_NUMBER
 ARG GH_PAGES_VERSION=226
 ARG NODE_MAJOR_VERSION=16
 
+RUN echo "RUBY_VERSION=${RUBY_VERSION}"
+RUN echo "BUILD_DATE=${BUILD_DATE}"
+RUN echo "VCS_REF=${VCS_REF}"
+RUN echo "VERSION_NUMBER=${VERSION_NUMBER}"
+RUN echo "GH_PAGES_VERSION=${GH_PAGES_VERSION}"
+RUN echo "NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION}"
+
 # Label Reference: https://github.com/opencontainers/image-spec/blob/main/annotations.md
 LABEL org.opencontainers.image.created="${BUILD_DATE}"
 LABEL org.opencontainers.image.title="Blog-in-a-box Container"
