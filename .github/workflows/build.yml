@@ -1,0 +1,42 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build_release:
+    name: "Build and Release"
+    strategy:
+      matrix:
+        RUBY_VERSION: [2.7.3]
+        NODE_MAJOR_VERSION: [16, 18]
+        GITHUB_PAGES_VERSION: [226]
+    runs-on: ubuntu-latest
+    env:
+      RUBY_VERSION: ${{ matrix.RUBY_VERSION }}
+      NODE_MAJOR_VERSION: ${{ matrix.NODE_MAJOR_VERSION }}
+      GITHUB_PAGES_VERSION: ${{ matrix.GITHUB_PAGES_VERSION }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION} --build-arg RUBY_VERSION=${RUBY_VERSION} --build-arg NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION} --build-arg BUILD_DATE=$(date -u +%Y-%m-%d_%H-%M-%S) --build-arg VCS_REF=${GITHUB_SHA} --build-arg GH_PAGES_VERSION=${GITHUB_PAGES_VERSION} --progress=plain
+      - name: Inspect the built image
+        run: docker inspect ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION}
+      - name: Login to registry (non-PR only)
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v2.0.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push Container to registry (non-PR only)
+        if: github.event_name != 'pull_request'
+        run: docker push --all-tags ${REGISTRY}/${IMAGE_NAME}
