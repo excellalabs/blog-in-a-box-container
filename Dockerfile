@@ -41,9 +41,9 @@ WORKDIR /docs
 #             Installling Base + Ruby Stuff          #
 ######################################################
 
-RUN apt-get -y update
+RUN apt-get -qq update
 
-RUN apt-get -y install \
+RUN apt-get -qq install \
     git \
     tzdata \
     dos2unix
