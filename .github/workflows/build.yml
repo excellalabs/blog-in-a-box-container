@@ -33,7 +33,7 @@ jobs:
       - name: Scan image
         uses: anchore/scan-action@v3
         with:
-          image: "${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION}"
+          image: ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION}
       - name: Login to registry (non-PR only)
         if: github.event_name != 'pull_request'
         uses: docker/login-action@v2.0.0
