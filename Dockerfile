@@ -48,7 +48,7 @@ RUN apt-get -y install \
     tzdata \
     dos2unix
 
-RUN gem install bundler -v ">= 2.2.33"
+RUN gem install bundler
 
 #################################################################
 #                  Installing node                              #
