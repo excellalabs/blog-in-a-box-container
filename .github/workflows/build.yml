@@ -35,7 +35,7 @@ jobs:
         with:
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:ruby${{ matrix.RUBY_VERSION }}-node${{ matrix.NODE_MAJOR_VERSION }}
           acs-report-enable: true
-          fail-build: false
+          fail-build: false # Set this way to ensure we keep reporting on errors.
       - name: Upload Anchore Scan Report
         uses: github/codeql-action/upload-sarif@v2
         with:
