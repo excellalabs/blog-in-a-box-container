@@ -49,6 +49,8 @@ RUN apt-get -y install \
     dos2unix
 
 RUN gem install bundler
+RUN gem update --system
+RUN gem update --default
 
 #################################################################
 #                  Installing node                              #
