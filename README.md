@@ -4,6 +4,8 @@ A repository that hosts the container for [blog-in-a-box](https://github.com/exc
 
 We maintain and publish the container separately so that we can reference it in Blog-in-a-Box to start the dev container quickly.
 
+We try to keep it up to date with [the GitHub Pages dependencies](https://pages.github.com/versions), though this is currently a manual process.
+
 ## What the Container Includes
 
 * Ruby, at the specified version (currently publish with 2.7.3 to match GitHub pages preferred version)
