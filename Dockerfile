@@ -1,16 +1,16 @@
 # Adapted from https://github.com/timbru31/docker-ruby-node/blob/master/2.7/16/Dockerfile
 # Using dependency references from https://pages.github.com/versions/
 
-# 2.7.3 is GitHub Pages 226 compatible
-ARG RUBY_VERSION=2.7.3
+# 2.7.4 is GitHub Pages 228 compatible
+ARG RUBY_VERSION=2.7.4
 
 FROM ruby:${RUBY_VERSION}
 
 # NOTE: These args need to stay below the FROM line in order for Docker to recognize them.
 ARG BUILD_DATE
 ARG VCS_REF
-ARG GH_PAGES_VERSION=226
-ARG NODE_MAJOR_VERSION=16
+ARG GH_PAGES_VERSION=228
+ARG NODE_MAJOR_VERSION=18
 
 RUN echo "RUBY_VERSION=${RUBY_VERSION}"
 RUN echo "BUILD_DATE=${BUILD_DATE}"
@@ -60,6 +60,7 @@ RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VERSION}.x | bash -\
     && apt-get upgrade -qq \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*\
+    && npm install -g npm\
     && npm install -g yarn@1
 
 RUN node -v
