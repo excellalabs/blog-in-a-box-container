@@ -8,7 +8,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build_release:
@@ -25,6 +24,9 @@ jobs:
       GITHUB_PAGES_VERSION: ${{ matrix.GITHUB_PAGES_VERSION }}
 
     steps:
+      - name: Lowercase repo for IMAGE_NAME
+        run: |
+          echo "IMAGE_NAME=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
       - uses: actions/checkout@v3
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${REGISTRY}/${IMAGE_NAME}:ruby${RUBY_VERSION}-node${NODE_MAJOR_VERSION} --build-arg RUBY_VERSION=${RUBY_VERSION} --build-arg NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION} --build-arg BUILD_DATE=$(date -u +%Y-%m-%d_%H-%M-%S) --build-arg VCS_REF=${GITHUB_SHA} --build-arg GH_PAGES_VERSION=${GITHUB_PAGES_VERSION} --progress=plain
