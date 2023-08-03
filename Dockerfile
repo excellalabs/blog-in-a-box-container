@@ -60,6 +60,7 @@ RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VERSION}.x | bash -\
     && apt-get upgrade -qq \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*\
+    && npm install -g npm\
     && npm install -g yarn@1
 
 RUN node -v
