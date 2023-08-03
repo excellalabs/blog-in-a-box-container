@@ -11,6 +11,7 @@ env:
 
 jobs:
   build_release:
+    permissions: write-all
     name: "Build and Release"
     strategy:
       matrix:
