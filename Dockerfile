@@ -11,8 +11,11 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG GH_PAGES_VERSION=228
 ARG NODE_MAJOR_VERSION=18
+# Bundler 2.4.x is the last to support ruby < 3.0.0
+ARG BUNDLER_VERSION=2.4.22
 
 RUN echo "RUBY_VERSION=${RUBY_VERSION}"
+RUN echo "BUNDLER_VERSION=${BUNDLER_VERSION}"
 RUN echo "BUILD_DATE=${BUILD_DATE}"
 RUN echo "VCS_REF=${VCS_REF}"
 RUN echo "GH_PAGES_VERSION=${GH_PAGES_VERSION}"
@@ -48,7 +51,7 @@ RUN apt-get -y install \
     tzdata \
     dos2unix
 
-RUN gem install bundler
+RUN gem install bundler -v ${BUNDLER_VERSION}
 
 #################################################################
 #                  Installing node                              #
@@ -66,5 +69,6 @@ RUN curl -sL https://deb.nodesource.com/setup_${NODE_MAJOR_VERSION}.x | bash -\
 RUN node -v
 RUN npm -v
 RUN npm install -g cspell markdownlint-cli
+RUN npm install -g markdownlint-cli2
 
 EXPOSE 4000

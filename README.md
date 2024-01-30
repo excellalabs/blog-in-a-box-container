@@ -11,7 +11,10 @@ We try to keep it up to date with [the GitHub Pages dependencies](https://pages.
 * Ruby, at the specified version (currently publish with 2.7.3 to match GitHub pages preferred version)
 * Git, tzdata updates, and the latest `bundler` gem at the time of build
 * Node at the specified major version (currently 16.x)
-* the `cSpell` and `markdownlint-cli` npm packages globally installed
+* the following npm packages globally installed:
+  * `cSpell`
+  * `markdownlint-cli`
+  * `markdownlint-cli2`
 * Port 4000 exposed, as this is what Jekyll publishes on.
 
 ## Get Involved
