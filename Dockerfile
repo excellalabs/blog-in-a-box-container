@@ -29,9 +29,9 @@ LABEL org.opencontainers.image.url="https://github.com/excellalabs/blog-in-a-box
 LABEL org.opencontainers.image.documentation="https://github.com/excellalabs/blog-in-a-box-container"
 LABEL org.opencontainers.image.source="https://github.com/excellalabs/blog-in-a-box"
 LABEL org.opencontainers.image.revision="${VCS_REF}"
-LABEL org.opencontainers.image.vendor="Excella"
+LABEL org.opencontainers.image.vendor="Sean Killeen"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.authors="Sean Killeen <sean.killeen@excella.com>"
+LABEL org.opencontainers.image.authors="Sean Killeen <SeanKilleen@gmail.com>"
 
 LABEL ruby_version="${RUBY_VERSION}"
 LABEL gh_pages_version="${GH_PAGES_VERSION}"
