@@ -11,7 +11,7 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG GH_PAGES_VERSION=229
 ARG NODE_MAJOR_VERSION=20
-# Bundler 2.4.x is the last to support ruby < 3.0.0
+# Bundler 2.4.x is the last to support ruby <= 2.7.4
 ARG BUNDLER_VERSION=2.4.22
 
 RUN echo "RUBY_VERSION=${RUBY_VERSION}"
