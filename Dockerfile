@@ -1,7 +1,7 @@
 # Adapted from https://github.com/timbru31/docker-ruby-node/blob/master/2.7/16/Dockerfile
 # Using dependency references from https://pages.github.com/versions/
 
-# 2.7.4 is GitHub Pages 228 compatible
+# 2.7.4 is GitHub Pages 229 compatible
 ARG RUBY_VERSION=2.7.4
 
 FROM ruby:${RUBY_VERSION}
@@ -9,9 +9,9 @@ FROM ruby:${RUBY_VERSION}
 # NOTE: These args need to stay below the FROM line in order for Docker to recognize them.
 ARG BUILD_DATE
 ARG VCS_REF
-ARG GH_PAGES_VERSION=228
-ARG NODE_MAJOR_VERSION=18
-# Bundler 2.4.x is the last to support ruby < 3.0.0
+ARG GH_PAGES_VERSION=229
+ARG NODE_MAJOR_VERSION=20
+# Bundler 2.4.x is the last to support ruby <= 2.7.4
 ARG BUNDLER_VERSION=2.4.22
 
 RUN echo "RUBY_VERSION=${RUBY_VERSION}"
@@ -25,13 +25,13 @@ RUN echo "NODE_MAJOR_VERSION=${NODE_MAJOR_VERSION}"
 LABEL org.opencontainers.image.created="${BUILD_DATE}"
 LABEL org.opencontainers.image.title="Blog-in-a-box Container"
 LABEL org.opencontainers.image.description="The container used by blog-in-a-box. Ruby, node, jekyll, and necessary packages."
-LABEL org.opencontainers.image.url="https://github.com/excellalabs/blog-in-a-box-container"
-LABEL org.opencontainers.image.documentation="https://github.com/excellalabs/blog-in-a-box-container"
-LABEL org.opencontainers.image.source="https://github.com/excellalabs/blog-in-a-box"
+LABEL org.opencontainers.image.url="https://github.com/SeanKilleen/blog-in-a-box-container"
+LABEL org.opencontainers.image.documentation="https://github.com/SeanKilleen/blog-in-a-box-container"
+LABEL org.opencontainers.image.source="https://github.com/SeanKilleen/blog-in-a-box-container"
 LABEL org.opencontainers.image.revision="${VCS_REF}"
-LABEL org.opencontainers.image.vendor="Excella"
+LABEL org.opencontainers.image.vendor="Sean Killeen"
 LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.authors="Sean Killeen <sean.killeen@excella.com>"
+LABEL org.opencontainers.image.authors="Sean Killeen <SeanKilleen@gmail.com>"
 
 LABEL ruby_version="${RUBY_VERSION}"
 LABEL gh_pages_version="${GH_PAGES_VERSION}"
