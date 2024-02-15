@@ -15,7 +15,7 @@ jobs:
     name: "Build and Release"
     strategy:
       matrix:
-        VERSIONS: [ {ruby: 2.7.3, ghpages: 226}, {ruby: 2.7.4, ghpages: 229}]
+        VERSIONS: [ {ruby: 2.7.3, ghpages: 226}, {ruby: 2.7.4, ghpages: 230}]
         NODE_MAJOR_VERSION: [18,20,21]
     runs-on: ubuntu-latest
     env:
